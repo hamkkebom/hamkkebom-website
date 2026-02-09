@@ -1,147 +1,142 @@
 "use client";
 
+import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
-import { Menu, ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { NAV_ITEMS, SITE_NAME } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+
+import Image from "next/image";
+
+const navItems = [
+  { name: "회사소개", href: "/about" },
+  { name: "사업영역", href: "/business" },
+  { name: "포트폴리오", href: "/portfolio" },
+  { name: "소식", href: "/news" },
+  { name: "문의", href: "/contact" },
+];
 
 export function Nav() {
+  const [isScrolled, setIsScrolled] = React.useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
-  const [serviceOpen, setServiceOpen] = useState(false);
+  const isHome = pathname === "/";
 
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Determine text color based on scroll state and page
+  // Home page starts transparent (white text), becomes white (black text) on scroll
+  // Other pages always have white background (black text) or specific header style
+  const isTransparent = isHome && !isScrolled && !isMobileMenuOpen;
+  
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-xl font-bold text-primary">{SITE_NAME}</span>
+    <header
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        isScrolled || !isHome || isMobileMenuOpen
+          ? "bg-white/90 backdrop-blur-md shadow-sm h-16"
+          : "bg-transparent h-20"
+      )}
+    >
+      <div className="container h-full px-4 md:px-6 flex items-center justify-between">
+        {/* Logo */}
+        <Link href="/" className="z-50 block">
+           <Image
+             src="/images/logo.png"
+             alt="함께봄"
+             width={160}
+             height={64}
+             priority
+             className={cn(
+               "h-14 w-auto object-contain transition-all duration-300",
+               isTransparent ? "brightness-0 invert" : ""
+             )}
+           />
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden items-center gap-1 md:flex">
-          {NAV_ITEMS.map((item) =>
-            "children" in item ? (
-              <div key={item.label} className="relative group">
-                <button
-                  type="button"
-                  className={cn(
-                    "flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground",
-                    pathname.startsWith("/services") &&
-                      "bg-accent text-accent-foreground"
-                  )}
-                >
-                  {item.label}
-                  <ChevronDown className="h-3.5 w-3.5" />
-                </button>
-                <div className="invisible absolute left-0 top-full pt-1 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
-                  <div className="rounded-md border bg-popover p-1 shadow-md">
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.href}
-                        href={child.href}
-                        className={cn(
-                          "block rounded-sm px-4 py-2 text-sm transition-colors hover:bg-accent hover:text-accent-foreground whitespace-nowrap",
-                          pathname === child.href &&
-                            "bg-accent text-accent-foreground"
-                        )}
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground",
-                  pathname === item.href && "bg-accent text-accent-foreground"
-                )}
-              >
-                {item.label}
-              </Link>
-            )
-          )}
-          <Button asChild size="sm" className="ml-2">
-            <Link href="/contact">무료 상담</Link>
+        <nav className="hidden md:flex items-center gap-8">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={cn(
+                "text-sm font-medium transition-colors hover:text-emerald-500",
+                isTransparent 
+                  ? "text-white/90 hover:text-white"
+                  : "text-slate-600 hover:text-emerald-500",
+                pathname === item.href && (isTransparent ? "text-white font-bold" : "text-emerald-500 font-bold")
+              )}
+            >
+              {item.name}
+            </Link>
+          ))}
+          <Button 
+            asChild
+            className={cn(
+                "ml-4 rounded-full px-6 font-semibold transition-all duration-300",
+                isTransparent 
+                    ? "border-2 border-white bg-transparent text-white hover:bg-white hover:text-slate-900" 
+                    : "border-0 bg-emerald-500 text-white hover:bg-emerald-600 shadow-sm"
+            )}
+          >
+            <Link href="/contact">프로젝트 문의</Link>
           </Button>
         </nav>
 
-        {/* Mobile Nav */}
-        <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="icon">
-              <Menu className="h-5 w-5" />
-              <span className="sr-only">메뉴</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="right" className="w-72">
-            <div className="flex flex-col gap-1 pt-6">
-              {NAV_ITEMS.map((item) =>
-                "children" in item ? (
-                  <div key={item.label}>
-                    <button
-                      type="button"
-                      onClick={() => setServiceOpen(!serviceOpen)}
-                      className="flex w-full items-center justify-between rounded-md px-3 py-2 text-sm font-medium hover:bg-accent"
-                    >
-                      {item.label}
-                      <ChevronDown
-                        className={cn(
-                          "h-4 w-4 transition-transform",
-                          serviceOpen && "rotate-180"
-                        )}
-                      />
-                    </button>
-                    {serviceOpen && (
-                      <div className="ml-4 flex flex-col gap-1">
-                        {item.children.map((child) => (
-                          <Link
-                            key={child.href}
-                            href={child.href}
-                            onClick={() => setOpen(false)}
-                            className={cn(
-                              "rounded-md px-3 py-2 text-sm transition-colors hover:bg-accent",
-                              pathname === child.href &&
-                                "bg-accent text-accent-foreground"
-                            )}
-                          >
-                            {child.label}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setOpen(false)}
-                    className={cn(
-                      "rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent",
-                      pathname === item.href &&
-                        "bg-accent text-accent-foreground"
-                    )}
-                  >
-                    {item.label}
-                  </Link>
-                )
-              )}
-              <Button asChild className="mt-4">
-                <Link href="/contact" onClick={() => setOpen(false)}>
-                  무료 상담
+        {/* Mobile Menu Toggle */}
+        <button
+          className="md:hidden z-50 p-2"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? (
+            <X className="h-6 w-6 text-black" />
+          ) : (
+            <Menu className={cn("h-6 w-6 transition-colors", isTransparent ? "text-white" : "text-black")} />
+          )}
+        </button>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="absolute inset-0 top-0 min-h-screen bg-white pt-24 px-6 flex flex-col md:hidden"
+          >
+            <nav className="flex flex-col gap-6 text-lg font-medium">
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={cn(
+                    "border-b border-gray-100 pb-4",
+                    pathname === item.href ? "text-emerald-500" : "text-gray-900"
+                  )}
+                >
+                  {item.name}
+                </Link>
+              ))}
+              <Button className="w-full mt-4 bg-emerald-500 hover:bg-emerald-600" asChild>
+                <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+                  프로젝트 문의하기
                 </Link>
               </Button>
-            </div>
-          </SheetContent>
-        </Sheet>
-      </div>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

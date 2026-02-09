@@ -31,6 +31,14 @@ yarn-error.log*
 # vercel
 .vercel
 
+# reference images
+gdweb-main.png
+current-site.png
+
+# agent
+.agent/
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.vercel

@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
 import { CTASection } from "@/components/cta-section";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
 
 // 임시 데이터 (Supabase 연동 전)
 const portfolioItems: Record<
@@ -18,6 +17,7 @@ const portfolioItems: Record<
     challenge: string;
     solution: string;
     result: string;
+    image: string;
   }
 > = {
   "ai-brand-video": {
@@ -30,6 +30,7 @@ const portfolioItems: Record<
     solution:
       "AI 나레이션과 자동 모션그래픽 생성을 활용해 제작 기간을 2주로 단축하고, 비용을 60% 절감했습니다.",
     result: "유튜브 조회수 50만 달성, 투자 문의 200% 증가",
+    image: "https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=2940&auto=format&fit=crop",
   },
   "ai-sns-campaign": {
     title: "이커머스 C사 SNS 캠페인",
@@ -41,6 +42,7 @@ const portfolioItems: Record<
     solution:
       "AI 콘텐츠 자동 생성 시스템을 구축하고, 최적 포스팅 시간 분석으로 인게이지먼트를 극대화했습니다.",
     result: "팔로워 300% 증가, ROAS 4.2배 달성",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop",
   },
   "ai-product-video": {
     title: "제조업 D사 제품 소개 영상",
@@ -52,6 +54,7 @@ const portfolioItems: Record<
     solution:
       "AI 3D 렌더링과 가상 환경 배경을 활용해 실감 나는 제품 소개 영상을 제작했습니다.",
     result: "영업 미팅 전환율 35% 향상",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop",
   },
   "ai-performance-marketing": {
     title: "쇼핑몰 E사 퍼포먼스 마케팅",
@@ -63,6 +66,7 @@ const portfolioItems: Record<
     solution:
       "AI 타겟 분석으로 핵심 고객을 세분화하고, 광고 소재 A/B 테스트를 자동화했습니다.",
     result: "CPA 40% 절감, 매출 2배 성장",
+    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2940&auto=format&fit=crop",
   },
 };
 
@@ -83,77 +87,111 @@ export default function PortfolioDetailPage({ params }: PageProps) {
   const item = portfolioItems[params.id];
   if (!item) notFound();
 
+  const categoryLabel = item.category === "video" ? "영상 제작" : "마케팅";
+
   return (
     <>
-      <section className="py-16">
-        <div className="mx-auto max-w-3xl px-4">
-          <Link
-            href="/portfolio"
-            className="inline-flex items-center text-sm text-muted-foreground transition-colors hover:text-primary"
-          >
-            <ArrowLeft className="mr-1 h-4 w-4" />
-            포트폴리오 목록
-          </Link>
-
-          <div className="mt-6">
-            <Badge
-              variant="secondary"
-              className={
-                item.category === "video"
-                  ? "bg-blue-100 text-blue-800"
-                  : "bg-orange-100 text-orange-800"
-              }
+      {/* Hero with image */}
+      <section className="relative bg-slate-900 py-28 sm:py-36 overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src={item.image}
+            alt={item.title}
+            fill
+            className="object-cover opacity-30"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-slate-900/40 to-slate-900" />
+        </div>
+        <div className="container relative z-10 px-4 md:px-6">
+          <div className="mx-auto max-w-3xl">
+            <Link
+              href="/portfolio"
+              className="inline-flex items-center text-sm text-slate-400 transition-colors hover:text-emerald-400 mb-6"
             >
-              {item.category === "video" ? "영상" : "마케팅"}
-            </Badge>
-            <h1 className="mt-3 text-2xl font-bold sm:text-3xl">
+              <ArrowLeft className="mr-1 h-4 w-4" />
+              포트폴리오 목록
+            </Link>
+            <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${
+              item.category === "video"
+                ? "bg-blue-500/20 text-blue-300"
+                : "bg-orange-500/20 text-orange-300"
+            }`}>
+              {categoryLabel}
+            </span>
+            <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
               {item.title}
             </h1>
-            <p className="mt-1 text-muted-foreground">{item.client}</p>
-          </div>
-
-          {/* Media placeholder */}
-          <div className="mt-8 aspect-video rounded-lg bg-muted flex items-center justify-center text-muted-foreground">
-            미디어 준비 중
-          </div>
-
-          <p className="mt-6 text-muted-foreground">{item.description}</p>
-
-          <div className="mt-8 grid gap-6 sm:grid-cols-3">
-            <Card>
-              <CardContent className="p-5">
-                <h3 className="font-semibold text-destructive">과제</h3>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  {item.challenge}
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-5">
-                <h3 className="font-semibold text-primary">솔루션</h3>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  {item.solution}
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-5">
-                <h3 className="font-semibold text-secondary-foreground">결과</h3>
-                <p className="mt-2 text-sm font-medium text-primary">
-                  {item.result}
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="mt-10 text-center">
-            <Button asChild>
-              <Link href="/contact">비슷한 프로젝트 문의하기</Link>
-            </Button>
+            <p className="mt-2 text-slate-400 text-lg">{item.client}</p>
           </div>
         </div>
       </section>
 
+      {/* Content */}
+      <section className="py-20 bg-white">
+        <div className="container px-4 md:px-6">
+          <div className="mx-auto max-w-3xl">
+            {/* Project Image */}
+            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-lg mb-12">
+              <Image
+                src={item.image}
+                alt={item.title}
+                fill
+                className="object-cover"
+              />
+            </div>
+
+            <p className="text-lg text-slate-700 leading-relaxed mb-12">
+              {item.description}
+            </p>
+
+            {/* Challenge / Solution / Result */}
+            <div className="grid gap-6 sm:grid-cols-3">
+              <div className="p-6 rounded-2xl bg-red-50 border border-red-100">
+                <h3 className="font-bold text-red-700 flex items-center gap-2 mb-3">
+                  <span className="h-2 w-2 rounded-full bg-red-500" />
+                  과제
+                </h3>
+                <p className="text-sm text-slate-700 leading-relaxed">
+                  {item.challenge}
+                </p>
+              </div>
+              <div className="p-6 rounded-2xl bg-emerald-50 border border-emerald-100">
+                <h3 className="font-bold text-emerald-700 flex items-center gap-2 mb-3">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+                  솔루션
+                </h3>
+                <p className="text-sm text-slate-700 leading-relaxed">
+                  {item.solution}
+                </p>
+              </div>
+              <div className="p-6 rounded-2xl bg-blue-50 border border-blue-100">
+                <h3 className="font-bold text-blue-700 flex items-center gap-2 mb-3">
+                  <span className="h-2 w-2 rounded-full bg-blue-500" />
+                  결과
+                </h3>
+                <p className="text-sm font-semibold text-blue-800 leading-relaxed">
+                  {item.result}
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-12 text-center">
+              <Button
+                asChild
+                size="lg"
+                className="rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-8"
+              >
+                <Link href="/contact">
+                  비슷한 프로젝트 문의하기 <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
       <CTASection />
     </>
   );

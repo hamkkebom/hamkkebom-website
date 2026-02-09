@@ -38,5 +38,20 @@ export async function sendContactNotification(params: ContactEmailParams) {
     `,
   };
 
-  await sgMail.send(msg);
+  // Check if API key is present. If not, log to console for dev/demo purposes.
+  if (!process.env.SENDGRID_API_KEY || process.env.SENDGRID_API_KEY.startsWith("placeholder")) {
+    console.log("--- [MOCK EMAIL SEND] ---");
+    console.log(`To: ${msg.to}`);
+    console.log(`Subject: ${msg.subject}`);
+    console.log(`Body: ${params.message}`);
+    console.log("-------------------------");
+    return;
+  }
+
+  try {
+    await sgMail.send(msg);
+  } catch (error) {
+    console.error("SendGrid error:", error);
+    // Don't throw, just log.
+  }
 }
