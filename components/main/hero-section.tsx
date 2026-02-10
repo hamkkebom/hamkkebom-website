@@ -12,16 +12,20 @@ export function HeroSection() {
     <section className="relative h-screen w-full overflow-hidden bg-slate-900">
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
+        {/* Static gradient background — shown immediately while video loads */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950" />
         <video
           autoPlay
           loop
           muted
           playsInline
+          preload="auto"
+          poster="https://images.pexels.com/videos/3129671/free-video-3129671.jpg?auto=compress&cs=tinysrgb&w=1920"
           onLoadedData={() => setIsVideoLoaded(true)}
           className={`h-full w-full object-cover transition-opacity duration-1000 ${isVideoLoaded ? "opacity-100" : "opacity-0"}`}
         >
           <source
-            src="https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4"
+            src="https://videos.pexels.com/video-files/3129671/3129671-hd_1920_1080_30fps.mp4"
             type="video/mp4"
           />
         </video>
