@@ -20,7 +20,7 @@ const config: Config = {
   	},
   	extend: {
   		fontFamily: {
-  			sans: ['var(--font-noto-sans-kr)', 'system-ui', 'sans-serif'],
+  			sans: ['var(--font-pretendard)', 'system-ui', 'sans-serif'],
   		},
   		colors: {
   			/* ── 봄의 정원 Brand Colors ────────────────── */
@@ -134,11 +134,31 @@ const config: Config = {
   				to: {
   					height: '0'
   				}
+  			},
+  			'text-reveal': {
+  				'0%': { opacity: '0', transform: 'translateY(20px)' },
+  				'100%': { opacity: '1', transform: 'translateY(0)' }
+  			},
+  			'float': {
+  				'0%, 100%': { transform: 'translateY(0)' },
+  				'50%': { transform: 'translateY(-10px)' }
+  			},
+  			'gradient-shift': {
+  				'0%, 100%': { backgroundPosition: '0% 50%' },
+  				'50%': { backgroundPosition: '100% 50%' }
+  			},
+  			'count-up': {
+  				'0%': { opacity: '0', transform: 'scale(0.8)' },
+  				'100%': { opacity: '1', transform: 'scale(1)' }
   			}
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+  			'text-reveal': 'text-reveal 0.6s ease-out forwards',
+  			'float': 'float 3s ease-in-out infinite',
+  			'gradient-shift': 'gradient-shift 8s ease infinite',
+  			'count-up': 'count-up 0.8s ease-out forwards'
   		}
   	}
   },

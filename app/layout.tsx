@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Sans_KR } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
@@ -7,11 +7,15 @@ import { OrganizationJsonLd } from "@/components/json-ld";
 import { GoogleAnalytics } from "@/components/google-analytics";
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from "@/lib/constants";
 
-const notoSansKR = Noto_Sans_KR({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-noto-sans-kr",
-  display: "swap",
+const pretendard = localFont({
+  src: [
+    { path: '../public/fonts/Pretendard-Regular.woff2', weight: '400', style: 'normal' },
+    { path: '../public/fonts/Pretendard-Medium.woff2', weight: '500', style: 'normal' },
+    { path: '../public/fonts/Pretendard-SemiBold.woff2', weight: '600', style: 'normal' },
+    { path: '../public/fonts/Pretendard-Bold.woff2', weight: '700', style: 'normal' },
+  ],
+  variable: '--font-pretendard',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -53,7 +57,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${notoSansKR.variable} font-sans antialiased`}>
+      <body className={`${pretendard.variable} font-sans antialiased`}>
         <OrganizationJsonLd />
         {process.env.NEXT_PUBLIC_GA_ID && (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
