@@ -98,31 +98,34 @@ export default function PortfolioDetailPage({ params }: PageProps) {
             src={item.image}
             alt={item.title}
             fill
-            className="object-cover opacity-30"
+            className="object-cover opacity-20"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-ink-900/60 via-ink-900/40 to-ink-900" />
+          <div className="absolute inset-0 bg-gradient-to-b from-ink-900/70 via-ink-900/50 to-ink-900" />
         </div>
+        <div className="absolute inset-0 dot-pattern opacity-[0.04]" />
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-brand-500/15 rounded-full blur-[120px]" />
+
         <div className="container relative z-10 px-4 md:px-6">
           <div className="mx-auto max-w-3xl">
             <Link
               href="/portfolio"
-              className="inline-flex items-center text-sm text-ink-400 transition-colors hover:text-brand-400 mb-6"
+              className="inline-flex items-center text-sm text-ink-400 transition-colors hover:text-brand-400 mb-6 group"
             >
-              <ArrowLeft className="mr-1 h-4 w-4" />
+              <ArrowLeft className="mr-1.5 h-4 w-4 group-hover:-translate-x-0.5 transition-transform" />
               포트폴리오 목록
             </Link>
-            <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${
+            <span className={`inline-block px-4 py-1.5 rounded-full text-xs font-bold border ${
               item.category === "video"
-                ? "bg-brand-500/20 text-brand-300"
-                : "bg-seal-500/20 text-seal-300"
+                ? "bg-brand-500/15 text-brand-300 border-brand-500/30"
+                : "bg-seal-500/15 text-seal-300 border-seal-500/30"
             }`}>
               {categoryLabel}
             </span>
             <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
               {item.title}
             </h1>
-            <p className="mt-2 text-ink-400 text-lg">{item.client}</p>
+            <p className="mt-3 text-ink-400 text-lg font-medium">{item.client}</p>
           </div>
         </div>
       </section>
@@ -132,7 +135,7 @@ export default function PortfolioDetailPage({ params }: PageProps) {
         <div className="container px-4 md:px-6">
           <div className="mx-auto max-w-3xl">
             {/* Project Image */}
-            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-lg mb-12">
+            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-xl mb-12 border border-ink-100/50">
               <Image
                 src={item.image}
                 alt={item.title}
@@ -141,23 +144,27 @@ export default function PortfolioDetailPage({ params }: PageProps) {
               />
             </div>
 
-            <p className="text-lg text-ink-700 leading-relaxed mb-12">
+            <p className="text-lg text-ink-700 leading-relaxed mb-14">
               {item.description}
             </p>
 
             {/* Challenge / Solution / Result */}
-            <div className="grid gap-6 sm:grid-cols-3">
-              <div className="p-6 rounded-2xl bg-seal-light border border-seal-200">
-                <h3 className="font-bold text-seal-700 flex items-center gap-2 mb-3">
-                  <span className="h-2 w-2 rounded-full bg-seal-500" />
+            <div className="grid gap-5 sm:grid-cols-3">
+              <div className="relative p-6 rounded-2xl bg-seal-light/70 border border-seal-200/80 overflow-hidden group hover:shadow-md transition-all duration-300">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-seal-500 to-seal-400" />
+                <h3 className="font-bold text-seal-700 flex items-center gap-2 mb-3 mt-1">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-seal-500/15">
+                    <span className="h-1.5 w-1.5 rounded-full bg-seal-500" />
+                  </span>
                   과제
                 </h3>
                 <p className="text-sm text-ink-700 leading-relaxed">
                   {item.challenge}
                 </p>
               </div>
-              <div className="p-6 rounded-2xl bg-brand-light border border-brand-200">
-                <h3 className="font-bold text-brand-700 flex items-center gap-2 mb-3">
+              <div className="relative p-6 rounded-2xl bg-brand-light/70 border border-brand-200/80 overflow-hidden group hover:shadow-md transition-all duration-300">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-500 to-brand-400" />
+                <h3 className="font-bold text-brand-700 flex items-center gap-2 mb-3 mt-1">
                   <CheckCircle2 className="h-4 w-4 text-brand-600" />
                   솔루션
                 </h3>
@@ -165,9 +172,12 @@ export default function PortfolioDetailPage({ params }: PageProps) {
                   {item.solution}
                 </p>
               </div>
-              <div className="p-6 rounded-2xl bg-blue-50 border border-blue-100">
-                <h3 className="font-bold text-blue-700 flex items-center gap-2 mb-3">
-                  <span className="h-2 w-2 rounded-full bg-blue-500" />
+              <div className="relative p-6 rounded-2xl bg-blue-50/70 border border-blue-200/80 overflow-hidden group hover:shadow-md transition-all duration-300">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-400" />
+                <h3 className="font-bold text-blue-700 flex items-center gap-2 mb-3 mt-1">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-500/15">
+                    <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+                  </span>
                   결과
                 </h3>
                 <p className="text-sm font-semibold text-blue-800 leading-relaxed">
@@ -176,11 +186,11 @@ export default function PortfolioDetailPage({ params }: PageProps) {
               </div>
             </div>
 
-            <div className="mt-12 text-center">
+            <div className="mt-14 text-center">
               <Button
                 asChild
                 size="lg"
-                className="rounded-full bg-brand-500 hover:bg-brand-600 text-white font-semibold px-8"
+                className="rounded-full bg-brand-500 hover:bg-brand-600 text-white font-semibold px-8 shadow-lg shadow-brand-500/20 hover:shadow-brand-500/30 hover:-translate-y-0.5 transition-all duration-300"
               >
                 <Link href="/contact">
                   비슷한 프로젝트 문의하기 <ArrowRight className="ml-2 h-4 w-4" />

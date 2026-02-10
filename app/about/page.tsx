@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { Target, Lightbulb, Users, Heart, ArrowRight, TrendingUp, Award, Building, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -76,24 +75,19 @@ const team = [
 export default function AboutPage() {
   return (
     <>
-      {/* Hero */}
+      {/* Hero — CSS gradient + dot-pattern */}
       <section className="relative bg-ink-900 py-28 sm:py-36 overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2940&auto=format&fit=crop"
-            alt="함께봄 팀"
-            fill
-            className="object-cover opacity-30"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-ink-900/70 via-ink-900/50 to-ink-900" />
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-900/40 via-ink-900 to-ink-950" />
+        <div className="absolute inset-0 dot-pattern opacity-[0.07]" />
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-brand-500/20 rounded-full blur-[120px]" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-seal-500/15 rounded-full blur-[100px]" />
+
         <div className="container relative z-10 px-4 md:px-6">
           <div className="mx-auto max-w-3xl text-center">
             <motion.span
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-brand-400 font-bold tracking-wider uppercase text-sm"
+              className="inline-block text-brand-400 font-bold tracking-wider uppercase text-sm border border-brand-500/30 rounded-full px-4 py-1.5 bg-brand-500/10 backdrop-blur-sm"
             >
               회사 소개
             </motion.span>
@@ -101,9 +95,10 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="mt-3 text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight"
+              className="mt-6 text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight"
             >
-              나란히 걷다,<br />마침내 봄
+              나란히 걷다,<br />
+              <span className="text-gradient">마침내 봄</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -129,15 +124,15 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-shadow duration-300"
+                className="glass-card rounded-2xl p-6 text-center hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
               >
-                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-brand-light text-brand-600 mb-3">
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-500/5 text-brand-500 mb-3 group-hover:scale-110 transition-transform duration-300">
                   <stat.icon className="h-6 w-6" />
                 </div>
-                <div className="text-3xl font-bold bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
+                <div className="text-3xl font-bold text-gradient animate-count-up">
                   {stat.number}
                 </div>
-                <p className="mt-1 text-sm text-ink-500">{stat.label}</p>
+                <p className="mt-1 text-sm text-ink-500 font-medium">{stat.label}</p>
               </motion.div>
             ))}
           </div>
@@ -147,15 +142,15 @@ export default function AboutPage() {
       {/* Values */}
       <section className="py-20 bg-white">
         <div className="container px-4 md:px-6">
-          <div className="mx-auto max-w-2xl text-center mb-12">
-            <span className="text-brand-500 font-bold tracking-wider uppercase text-sm">
+          <div className="mx-auto max-w-2xl text-center mb-14">
+            <span className="inline-block text-brand-500 font-bold tracking-wider uppercase text-sm border border-brand-200 rounded-full px-4 py-1.5 bg-brand-50">
               핵심 가치
             </span>
-            <h2 className="mt-2 text-3xl md:text-4xl font-bold text-ink-900">
+            <h2 className="mt-4 text-3xl md:text-4xl font-bold text-ink-900">
               우리가 일하는 방식
             </h2>
           </div>
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
             {values.map((v, index) => (
               <motion.div
                 key={v.title}
@@ -163,15 +158,18 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="text-center p-8 rounded-2xl bg-hanji hover:bg-white hover:shadow-lg transition-all duration-300 group"
+                className="relative text-center p-8 rounded-2xl bg-hanji group hover:-translate-y-1 transition-all duration-300 overflow-hidden border border-transparent hover:border-brand-200 hover:shadow-lg"
               >
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-light text-brand-600 group-hover:bg-brand-500 group-hover:text-white transition-all duration-300">
-                  <v.icon className="h-7 w-7" />
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-brand-500/0 to-seal-500/0 group-hover:from-brand-500/5 group-hover:to-seal-500/5 transition-all duration-500" />
+                <div className="relative z-10">
+                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500 to-brand-600 text-white shadow-lg shadow-brand-500/20 group-hover:shadow-brand-500/40 group-hover:scale-110 transition-all duration-300">
+                    <v.icon className="h-7 w-7" />
+                  </div>
+                  <h3 className="mt-5 text-lg font-bold text-ink-900">{v.title}</h3>
+                  <p className="mt-3 text-sm text-ink-500 leading-relaxed">
+                    {v.description}
+                  </p>
                 </div>
-                <h3 className="mt-5 text-lg font-bold text-ink-900">{v.title}</h3>
-                <p className="mt-3 text-sm text-ink-500 leading-relaxed">
-                  {v.description}
-                </p>
               </motion.div>
             ))}
           </div>
@@ -181,15 +179,18 @@ export default function AboutPage() {
       {/* Milestones */}
       <section className="py-20 bg-hanji">
         <div className="container px-4 md:px-6">
-          <div className="mx-auto max-w-2xl text-center mb-12">
-            <span className="text-brand-500 font-bold tracking-wider uppercase text-sm">
+          <div className="mx-auto max-w-2xl text-center mb-14">
+            <span className="inline-block text-brand-500 font-bold tracking-wider uppercase text-sm border border-brand-200 rounded-full px-4 py-1.5 bg-brand-50">
               연혁
             </span>
-            <h2 className="mt-2 text-3xl md:text-4xl font-bold text-ink-900">
+            <h2 className="mt-4 text-3xl md:text-4xl font-bold text-ink-900">
               성장의 발자취
             </h2>
           </div>
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-2xl mx-auto relative">
+            {/* Gradient connector line */}
+            <div className="absolute left-[27px] top-0 bottom-0 w-px bg-gradient-to-b from-brand-500 via-brand-300 to-brand-100" />
+
             {milestones.map((m, index) => (
               <motion.div
                 key={index}
@@ -197,18 +198,17 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08 }}
-                className="flex gap-6 group"
+                className="flex gap-6 group relative"
               >
-                <div className="flex flex-col items-center">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-500 text-white text-xs font-bold shrink-0 group-hover:scale-110 group-hover:shadow-md group-hover:shadow-brand-500/30 transition-all duration-300">
+                <div className="flex flex-col items-center z-10">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-brand-600 text-white text-sm font-bold shrink-0 shadow-lg shadow-brand-500/25 group-hover:scale-110 group-hover:shadow-brand-500/40 transition-all duration-300 ring-4 ring-hanji">
                     {m.year}
                   </div>
-                  {index < milestones.length - 1 && (
-                    <div className="w-px h-full bg-ink-200 my-2" />
-                  )}
                 </div>
-                <div className="pb-8">
-                  <p className="text-base font-medium text-ink-900 pt-2 group-hover:text-brand-700 transition-colors duration-300">{m.event}</p>
+                <div className="pb-10 pt-3">
+                  <div className="bg-white rounded-xl px-5 py-3.5 shadow-sm group-hover:shadow-md group-hover:bg-brand-50/50 transition-all duration-300 border border-ink-100 group-hover:border-brand-200">
+                    <p className="text-base font-medium text-ink-800 group-hover:text-brand-700 transition-colors duration-300">{m.event}</p>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -219,11 +219,11 @@ export default function AboutPage() {
       {/* Team */}
       <section className="py-20 bg-white">
         <div className="container px-4 md:px-6">
-          <div className="mx-auto max-w-2xl text-center mb-12">
-            <span className="text-brand-500 font-bold tracking-wider uppercase text-sm">
+          <div className="mx-auto max-w-2xl text-center mb-14">
+            <span className="inline-block text-brand-500 font-bold tracking-wider uppercase text-sm border border-brand-200 rounded-full px-4 py-1.5 bg-brand-50">
               팀
             </span>
-            <h2 className="mt-2 text-3xl md:text-4xl font-bold text-ink-900">
+            <h2 className="mt-4 text-3xl md:text-4xl font-bold text-ink-900">
               전문가 팀이 함께합니다
             </h2>
           </div>
@@ -237,11 +237,14 @@ export default function AboutPage() {
                 transition={{ delay: index * 0.1 }}
                 className="text-center group"
               >
-                <div className={`mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br ${member.gradient} text-2xl font-bold text-white shadow-lg group-hover:scale-110 group-hover:shadow-xl transition-all duration-300`}>
-                  {member.name[0]}
+                <div className="relative mx-auto w-24 h-24">
+                  <div className={`absolute -inset-1 rounded-full bg-gradient-to-br ${member.gradient} opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500`} />
+                  <div className={`relative flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br ${member.gradient} text-2xl font-bold text-white shadow-lg group-hover:scale-105 transition-all duration-300`}>
+                    {member.name[0]}
+                  </div>
                 </div>
                 <h3 className="mt-5 text-lg font-bold text-ink-900">{member.name}</h3>
-                <p className="text-sm text-brand-600 font-medium">{member.role}</p>
+                <p className="text-sm text-brand-600 font-semibold">{member.role}</p>
                 <p className="mt-3 text-sm text-ink-500 leading-relaxed">
                   {member.description}
                 </p>
@@ -251,17 +254,13 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Mission banner */}
+      {/* Mission banner — CSS gradient (no external images) */}
       <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2940&auto=format&fit=crop"
-            alt="사무실"
-            fill
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-ink-900/70" />
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-ink-900 via-ink-800 to-brand-900" />
+        <div className="absolute inset-0 dot-pattern opacity-[0.05]" />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-500/10 rounded-full blur-[150px]" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-seal-500/10 rounded-full blur-[120px]" />
+
         <div className="container relative z-10 px-4 md:px-6">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight">
@@ -273,7 +272,7 @@ export default function AboutPage() {
             <Button
               asChild
               size="lg"
-              className="mt-8 rounded-full bg-brand-500 hover:bg-brand-600 text-white font-semibold px-8 shadow-lg hover:shadow-brand-500/20 transition-all duration-300"
+              className="mt-8 rounded-full bg-brand-500 hover:bg-brand-600 text-white font-semibold px-8 shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 hover:-translate-y-0.5 transition-all duration-300"
             >
               <Link href="/contact">
                 프로젝트 문의하기 <ArrowRight className="ml-2 h-4 w-4" />
