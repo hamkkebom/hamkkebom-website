@@ -68,8 +68,12 @@ export function HeroSection() {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer opacity-70 transition-opacity hover:opacity-100">
-        <ArrowDown className="h-8 w-8 text-white" />
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce cursor-pointer opacity-60 transition-opacity hover:opacity-100">
+        <span className="text-xs text-white/70 tracking-widest uppercase font-light">Scroll</span>
+        <div className="relative">
+          <ArrowDown className="h-6 w-6 text-white" />
+          <div className="absolute inset-0 h-6 w-6 bg-white/20 rounded-full blur-md" />
+        </div>
       </div>
     </section>
   );

@@ -5,6 +5,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Calendar } from "lucide-react";
 
+const categoryColors: Record<string, { bg: string; text: string }> = {
+  "인사이트": { bg: "bg-blue-50", text: "text-blue-700" },
+  "기업소식": { bg: "bg-emerald-50", text: "text-emerald-700" },
+  "프로젝트": { bg: "bg-violet-50", text: "text-violet-700" },
+};
+
 const newsItems = [
   {
     id: 1,
@@ -70,8 +76,8 @@ export function NewsSection() {
              viewport={{ once: true }}
              transition={{ delay: 0.2 }}
            >
-              <Link href="/news" className="text-slate-500 hover:text-emerald-500 font-medium inline-flex items-center mt-4 md:mt-0 transition-colors">
-                전체보기 <ArrowRight className="ml-2 h-4 w-4" />
+              <Link href="/news" className="text-slate-500 hover:text-emerald-500 font-medium inline-flex items-center mt-4 md:mt-0 transition-colors group">
+                전체보기 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Link>
            </motion.div>
         </div>
@@ -85,7 +91,7 @@ export function NewsSection() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
             >
-              <Link href={item.link} className="group block h-full bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+              <Link href={item.link} className="group block h-full bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-2 transition-all duration-400">
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <Image
                     src={item.image}
@@ -93,14 +99,15 @@ export function NewsSection() {
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="absolute top-4 left-4">
-                    <span className="bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-slate-800 shadow-sm">
+                    <span className={`${categoryColors[item.category]?.bg || "bg-slate-100"} ${categoryColors[item.category]?.text || "text-slate-800"} backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold shadow-sm`}>
                       {item.category}
                     </span>
                   </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="font-bold text-lg text-slate-900 mb-3 line-clamp-2 leading-snug group-hover:text-emerald-500 transition-colors">
+                  <h3 className="font-bold text-lg text-slate-900 mb-3 line-clamp-2 leading-snug group-hover:text-emerald-600 transition-colors duration-300">
                     {item.title}
                   </h3>
                   <div className="flex items-center text-sm text-slate-400 mt-auto">

@@ -32,9 +32,6 @@ export function Nav() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Determine text color based on scroll state and page
-  // Home page starts transparent (white text), becomes white (black text) on scroll
-  // Other pages always have white background (black text) or specific header style
   const isTransparent = isHome && !isScrolled && !isMobileMenuOpen;
   
   return (
@@ -42,7 +39,7 @@ export function Nav() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled || !isHome || isMobileMenuOpen
-          ? "bg-white/90 backdrop-blur-md shadow-sm h-16"
+          ? "bg-white/95 backdrop-blur-xl shadow-sm h-16 border-b border-slate-100"
           : "bg-transparent h-20"
       )}
     >
@@ -69,7 +66,7 @@ export function Nav() {
               key={item.href}
               href={item.href}
               className={cn(
-                "text-sm font-medium transition-colors hover:text-emerald-500",
+                "relative text-sm font-medium transition-colors hover:text-emerald-500 py-1",
                 isTransparent 
                   ? "text-white/90 hover:text-white"
                   : "text-slate-600 hover:text-emerald-500",
@@ -77,6 +74,17 @@ export function Nav() {
               )}
             >
               {item.name}
+              {/* Active underline indicator */}
+              {pathname === item.href && (
+                <motion.div
+                  layoutId="nav-underline"
+                  className={cn(
+                    "absolute -bottom-1 left-0 right-0 h-0.5 rounded-full",
+                    isTransparent ? "bg-white" : "bg-emerald-500"
+                  )}
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                />
+              )}
             </Link>
           ))}
           <Button 
@@ -85,7 +93,7 @@ export function Nav() {
                 "ml-4 rounded-full px-6 font-semibold transition-all duration-300",
                 isTransparent 
                     ? "border-2 border-white bg-transparent text-white hover:bg-white hover:text-slate-900" 
-                    : "border-0 bg-emerald-500 text-white hover:bg-emerald-600 shadow-sm"
+                    : "border-0 bg-emerald-500 text-white hover:bg-emerald-600 shadow-sm hover:shadow-md"
             )}
           >
             <Link href="/contact">프로젝트 문의</Link>
@@ -115,20 +123,26 @@ export function Nav() {
             className="absolute inset-0 top-0 min-h-screen bg-white pt-24 px-6 flex flex-col md:hidden"
           >
             <nav className="flex flex-col gap-6 text-lg font-medium">
-              {navItems.map((item) => (
-                <Link
+              {navItems.map((item, index) => (
+                <motion.div
                   key={item.href}
-                  href={item.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={cn(
-                    "border-b border-gray-100 pb-4",
-                    pathname === item.href ? "text-emerald-500" : "text-gray-900"
-                  )}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.05 }}
                 >
-                  {item.name}
-                </Link>
+                  <Link
+                    href={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={cn(
+                      "border-b border-gray-100 pb-4 block",
+                      pathname === item.href ? "text-emerald-500" : "text-gray-900"
+                    )}
+                  >
+                    {item.name}
+                  </Link>
+                </motion.div>
               ))}
-              <Button className="w-full mt-4 bg-emerald-500 hover:bg-emerald-600" asChild>
+              <Button className="w-full mt-4 bg-emerald-500 hover:bg-emerald-600 rounded-xl" asChild>
                 <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
                   프로젝트 문의하기
                 </Link>

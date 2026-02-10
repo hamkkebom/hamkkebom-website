@@ -1,10 +1,22 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-import { Facebook, Instagram, Youtube } from "lucide-react";
+import { Facebook, Instagram, Youtube, ArrowUp } from "lucide-react";
+
+const socialLinks = [
+  { icon: Instagram, href: "#", label: "Instagram", hoverColor: "hover:text-pink-400" },
+  { icon: Youtube, href: "#", label: "Youtube", hoverColor: "hover:text-red-400" },
+  { icon: Facebook, href: "#", label: "Facebook", hoverColor: "hover:text-blue-400" },
+];
 
 export function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <footer className="bg-slate-900 text-slate-300 py-12 border-t border-slate-800">
+    <footer className="bg-slate-900 text-slate-300 py-12 border-t border-slate-800 relative">
       <div className="container px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           <div className="col-span-1 md:col-span-1">
@@ -22,37 +34,48 @@ export function Footer() {
               세상을 바꾸는 새로운 시선.
             </p>
             <div className="flex gap-4">
-               <Link href="#" className="hover:text-white transition-colors"><Instagram className="h-5 w-5" /></Link>
-               <Link href="#" className="hover:text-white transition-colors"><Youtube className="h-5 w-5" /></Link>
-               <Link href="#" className="hover:text-white transition-colors"><Facebook className="h-5 w-5" /></Link>
+               {socialLinks.map(({ icon: Icon, href, label, hoverColor }) => (
+                 <Link
+                   key={label}
+                   href={href}
+                   aria-label={label}
+                   className={`text-slate-400 ${hoverColor} hover:scale-110 transition-all duration-300`}
+                 >
+                   <Icon className="h-5 w-5" />
+                 </Link>
+               ))}
             </div>
           </div>
           
           <div>
             <h4 className="font-bold text-white mb-4">회사</h4>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/about" className="hover:text-white transition-colors">회사소개</Link></li>
-              <li><Link href="/history" className="hover:text-white transition-colors">연혁</Link></li>
-              <li><Link href="/careers" className="hover:text-white transition-colors">채용</Link></li>
-              <li><Link href="/contact" className="hover:text-white transition-colors">문의하기</Link></li>
+            <ul className="space-y-2.5 text-sm">
+              <li><Link href="/about" className="hover:text-emerald-400 transition-colors">회사소개</Link></li>
+              <li><Link href="/history" className="hover:text-emerald-400 transition-colors">연혁</Link></li>
+              <li><Link href="/careers" className="hover:text-emerald-400 transition-colors">채용</Link></li>
+              <li><Link href="/contact" className="hover:text-emerald-400 transition-colors">문의하기</Link></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-bold text-white mb-4">사업영역</h4>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/business/video" className="hover:text-white transition-colors">AI 영상 제작</Link></li>
-              <li><Link href="/business/marketing" className="hover:text-white transition-colors">디지털 마케팅</Link></li>
-              <li><Link href="/business/education" className="hover:text-white transition-colors">미래 교육</Link></li>
+            <ul className="space-y-2.5 text-sm">
+              <li><Link href="/services/video" className="hover:text-emerald-400 transition-colors">AI 영상 제작</Link></li>
+              <li><Link href="/services/marketing" className="hover:text-emerald-400 transition-colors">디지털 마케팅</Link></li>
+              <li><Link href="/services/education" className="hover:text-emerald-400 transition-colors">미래 교육</Link></li>
             </ul>
           </div>
 
           <div>
              <h4 className="font-bold text-white mb-4">연락처</h4>
-             <ul className="space-y-2 text-sm text-slate-300">
+             <ul className="space-y-2.5 text-sm text-slate-300">
                 <li>서울특별시 강남구</li>
                 <li>Tel: 02-1234-5678</li>
-                <li>Email: contact@hamkkebom.com</li>
+                <li>
+                  <Link href="mailto:contact@hamkkebom.com" className="hover:text-emerald-400 transition-colors">
+                    contact@hamkkebom.com
+                  </Link>
+                </li>
              </ul>
           </div>
         </div>
@@ -66,6 +89,15 @@ export function Footer() {
            <p>© 2025 함께봄. All rights reserved.</p>
         </div>
       </div>
+
+      {/* Back to Top Button */}
+      <button
+        onClick={scrollToTop}
+        className="absolute right-6 bottom-8 flex h-10 w-10 items-center justify-center rounded-full bg-slate-800 text-slate-400 hover:bg-emerald-500 hover:text-white transition-all duration-300 shadow-lg hover:shadow-emerald-500/20 hover:-translate-y-1"
+        aria-label="맨 위로"
+      >
+        <ArrowUp className="h-5 w-5" />
+      </button>
     </footer>
   );
 }

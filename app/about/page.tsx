@@ -1,15 +1,11 @@
-import type { Metadata } from "next";
+"use client";
+
 import Image from "next/image";
-import { Target, Lightbulb, Users, Heart, ArrowRight } from "lucide-react";
+import { Target, Lightbulb, Users, Heart, ArrowRight, TrendingUp, Award, Building, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { CTASection } from "@/components/cta-section";
-
-export const metadata: Metadata = {
-  title: "회사 소개",
-  description:
-    "함께봄은 AI 기술로 영상 제작, 교육, 마케팅 서비스를 제공하는 전문 기업입니다.",
-};
+import { motion } from "framer-motion";
 
 const values = [
   {
@@ -34,6 +30,13 @@ const values = [
   },
 ];
 
+const stats = [
+  { icon: Briefcase, number: "50+", label: "완료 프로젝트" },
+  { icon: Building, number: "30+", label: "파트너 기업" },
+  { icon: Award, number: "15+", label: "수상 실적" },
+  { icon: TrendingUp, number: "98%", label: "고객 만족도" },
+];
+
 const milestones = [
   { year: "2023", event: "함께봄 설립, AI 영상 제작 사업 시작" },
   { year: "2023", event: "첫 기업 고객 AI 교육 프로그램 운영" },
@@ -48,21 +51,25 @@ const team = [
     name: "대표",
     role: "CEO / AI 전략",
     description: "AI 비즈니스 기획 및 전략 총괄. 데이터 기반의 의사결정으로 팀을 이끕니다.",
+    gradient: "from-emerald-400 to-teal-500",
   },
   {
     name: "영상팀 리드",
     role: "AI 영상 프로듀서",
     description: "AI 기반 영상 제작 및 편집 전문. 창의적 비주얼 스토리텔링을 설계합니다.",
+    gradient: "from-blue-400 to-cyan-500",
   },
   {
     name: "교육팀 리드",
     role: "AI 교육 디렉터",
     description: "기업 맞춤 AI 교육 프로그램 설계. 실무 역량 강화에 집중합니다.",
+    gradient: "from-violet-400 to-purple-500",
   },
   {
     name: "마케팅팀 리드",
     role: "AI 마케팅 전략가",
     description: "데이터 기반 AI 마케팅 캠페인 기획. 성과 최적화를 추구합니다.",
+    gradient: "from-orange-400 to-red-500",
   },
 ];
 
@@ -83,16 +90,56 @@ export default function AboutPage() {
         </div>
         <div className="container relative z-10 px-4 md:px-6">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="text-emerald-400 font-bold tracking-wider uppercase text-sm">
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-emerald-400 font-bold tracking-wider uppercase text-sm"
+            >
               회사 소개
-            </span>
-            <h1 className="mt-3 text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight">
+            </motion.span>
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="mt-3 text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight"
+            >
               나란히 걷다,<br />마침내 봄
-            </h1>
-            <p className="mt-6 text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto">
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="mt-6 text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto"
+            >
               AI 기술의 가능성을 사업 현장에 연결합니다. 함께봄은 영상 제작, 교육, 마케팅 분야에서 
               AI를 활용해 클라이언트의 비즈니스 성장을 돕는 전문 기업입니다.
-            </p>
+            </motion.p>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Counter */}
+      <section className="relative -mt-16 z-10 pb-8">
+        <div className="container px-4 md:px-6">
+          <div className="mx-auto max-w-4xl grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {stats.map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-white rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-shadow duration-300"
+              >
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600 mb-3">
+                  <stat.icon className="h-6 w-6" />
+                </div>
+                <div className="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                  {stat.number}
+                </div>
+                <p className="mt-1 text-sm text-slate-600">{stat.label}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -109,9 +156,13 @@ export default function AboutPage() {
             </h2>
           </div>
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
-            {values.map((v) => (
-              <div
+            {values.map((v, index) => (
+              <motion.div
                 key={v.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
                 className="text-center p-8 rounded-2xl bg-slate-50 hover:bg-white hover:shadow-lg transition-all duration-300 group"
               >
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-600 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
@@ -121,7 +172,7 @@ export default function AboutPage() {
                 <p className="mt-3 text-sm text-slate-600 leading-relaxed">
                   {v.description}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -140,9 +191,16 @@ export default function AboutPage() {
           </div>
           <div className="max-w-2xl mx-auto">
             {milestones.map((m, index) => (
-              <div key={index} className="flex gap-6 group">
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.08 }}
+                className="flex gap-6 group"
+              >
                 <div className="flex flex-col items-center">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500 text-white text-xs font-bold shrink-0">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500 text-white text-xs font-bold shrink-0 group-hover:scale-110 group-hover:shadow-md group-hover:shadow-emerald-500/30 transition-all duration-300">
                     {m.year}
                   </div>
                   {index < milestones.length - 1 && (
@@ -150,9 +208,9 @@ export default function AboutPage() {
                   )}
                 </div>
                 <div className="pb-8">
-                  <p className="text-base font-medium text-slate-900 pt-2">{m.event}</p>
+                  <p className="text-base font-medium text-slate-900 pt-2 group-hover:text-emerald-700 transition-colors duration-300">{m.event}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -170,9 +228,16 @@ export default function AboutPage() {
             </h2>
           </div>
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
-            {team.map((member) => (
-              <div key={member.name} className="text-center group">
-                <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 text-2xl font-bold text-white shadow-lg">
+            {team.map((member, index) => (
+              <motion.div
+                key={member.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="text-center group"
+              >
+                <div className={`mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br ${member.gradient} text-2xl font-bold text-white shadow-lg group-hover:scale-110 group-hover:shadow-xl transition-all duration-300`}>
                   {member.name[0]}
                 </div>
                 <h3 className="mt-5 text-lg font-bold text-slate-900">{member.name}</h3>
@@ -180,7 +245,7 @@ export default function AboutPage() {
                 <p className="mt-3 text-sm text-slate-600 leading-relaxed">
                   {member.description}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -208,7 +273,7 @@ export default function AboutPage() {
             <Button
               asChild
               size="lg"
-              className="mt-8 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-8"
+              className="mt-8 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-8 shadow-lg hover:shadow-emerald-500/20 transition-all duration-300"
             >
               <Link href="/contact">
                 프로젝트 문의하기 <ArrowRight className="ml-2 h-4 w-4" />

@@ -68,12 +68,17 @@ export function ServicePageLayout({
       />
       <FaqJsonLd faqs={faqs} />
 
-      {/* Hero — Dark header style */}
+      {/* Hero — Dark header with dot pattern */}
       <section className="relative bg-slate-900 py-28 sm:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/20 via-transparent to-slate-900/80" />
+        {/* Dot pattern overlay */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)',
+          backgroundSize: '24px 24px'
+        }} />
         <div className="container relative z-10 px-4 md:px-6">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-500/20 text-emerald-400">
+            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-500/20 text-emerald-400 ring-1 ring-emerald-500/30">
               <Icon className="h-8 w-8" />
             </div>
             <span className="text-emerald-400 font-bold tracking-wider uppercase text-sm">
@@ -98,9 +103,9 @@ export function ServicePageLayout({
               <div key={step.step} className="relative group">
                 {/* Connector line */}
                 {index < process.length - 1 && (
-                  <div className="hidden lg:block absolute top-5 left-[60%] w-full h-px bg-slate-200" />
+                  <div className="hidden lg:block absolute top-5 left-[60%] w-full h-px bg-gradient-to-r from-emerald-300 to-slate-200" />
                 )}
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500 text-sm font-bold text-white relative z-10">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 text-sm font-bold text-white relative z-10 shadow-md shadow-emerald-500/20 group-hover:scale-110 transition-transform duration-300">
                   {step.step}
                 </div>
                 <h3 className="mt-4 text-lg font-bold text-slate-900">{step.title}</h3>
@@ -119,7 +124,8 @@ export function ServicePageLayout({
           <SectionHeader badge="서비스 유형" title="서비스 범위" />
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {types.map((type) => (
-              <Card key={type.title} className="border-0 shadow-sm hover:shadow-md transition-shadow duration-300">
+              <Card key={type.title} className="border-0 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden group">
+                <div className="h-1 bg-gradient-to-r from-emerald-400 to-teal-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <CardContent className="p-8">
                   <h3 className="text-xl font-bold text-slate-900">{type.title}</h3>
                   <p className="mt-2 text-sm text-slate-600">
@@ -155,18 +161,23 @@ export function ServicePageLayout({
             {pricing.map((tier, index) => (
               <Card
                 key={tier.name}
-                className={`border-0 shadow-sm relative overflow-hidden ${
+                className={`border-0 shadow-sm relative overflow-hidden hover:-translate-y-1 transition-all duration-300 ${
                   index === 1
-                    ? "ring-2 ring-emerald-500 shadow-md"
-                    : ""
+                    ? "ring-2 ring-emerald-500 shadow-lg shadow-emerald-500/10"
+                    : "hover:shadow-lg"
                 }`}
               >
                 {index === 1 && (
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-emerald-500" />
+                  <>
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-400 to-teal-500" />
+                    <div className="absolute top-4 right-4">
+                      <span className="bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full">추천</span>
+                    </div>
+                  </>
                 )}
                 <CardContent className="p-8">
                   <h3 className="text-lg font-bold text-slate-900">{tier.name}</h3>
-                  <div className="mt-3 text-3xl font-bold text-emerald-600">
+                  <div className="mt-3 text-3xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                     {tier.price}
                   </div>
                   <p className="mt-2 text-sm text-slate-500">

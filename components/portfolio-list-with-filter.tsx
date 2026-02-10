@@ -33,13 +33,18 @@ export function PortfolioListWithFilter({ items }: PortfolioListWithFilterProps)
             key={category.id}
             onClick={() => setActiveCategory(category.id)}
             className={cn(
-              "px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
+              "px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300",
               activeCategory === category.id
-                ? "bg-gray-900 text-white shadow-md transform scale-105"
-                : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 hover:border-gray-300"
+                ? "bg-slate-900 text-white shadow-lg shadow-slate-900/20 scale-105"
+                : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 hover:border-slate-300 hover:shadow-sm"
             )}
           >
             {category.label}
+            {activeCategory === category.id && (
+              <span className="ml-2 bg-white/20 px-1.5 py-0.5 rounded-full text-xs">
+                {filteredItems.length}
+              </span>
+            )}
           </button>
         ))}
       </div>
