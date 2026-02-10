@@ -24,8 +24,8 @@ const businesses: BusinessItem[] = [
     image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=2680&auto=format&fit=crop",
     link: "/services/video",
     icon: Video,
-    gradient: "from-blue-500 to-cyan-400",
-    accentColor: "bg-blue-500",
+    gradient: "from-brand-500 to-brand-400",
+    accentColor: "bg-brand-500",
   },
   {
     title: "디지털 마케팅",
@@ -33,8 +33,8 @@ const businesses: BusinessItem[] = [
     image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2670&auto=format&fit=crop",
     link: "/services/marketing",
     icon: Megaphone,
-    gradient: "from-emerald-500 to-teal-400",
-    accentColor: "bg-emerald-500",
+    gradient: "from-seal-500 to-seal-400",
+    accentColor: "bg-seal-500",
   },
   {
     title: "미래 교육",
@@ -42,8 +42,8 @@ const businesses: BusinessItem[] = [
     image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=2732&auto=format&fit=crop",
     link: "/services/education",
     icon: GraduationCap,
-    gradient: "from-violet-500 to-purple-400",
-    accentColor: "bg-violet-500",
+    gradient: "from-ink-500 to-ink-400",
+    accentColor: "bg-ink-600",
   },
 ];
 
@@ -56,7 +56,7 @@ export function BusinessSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-emerald-500 font-bold tracking-wider uppercase mb-4 block"
+            className="text-brand-500 font-bold tracking-wider uppercase mb-4 block"
           >
             사업영역
           </motion.span>
@@ -65,7 +65,7 @@ export function BusinessSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl md:text-4xl font-bold text-slate-900 mb-4"
+            className="text-3xl md:text-4xl font-bold text-ink-900 mb-4"
           >
             사람과 기술이 함께 만드는 미래
           </motion.h2>
@@ -74,7 +74,7 @@ export function BusinessSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-slate-600 max-w-2xl mx-auto"
+            className="text-ink-400 max-w-2xl mx-auto"
           >
             함께봄은 AI 기술과 창의적인 아이디어를 결합하여
             <br className="hidden md:block" /> 새로운 가치를 창출하고 더 나은 세상을 만들어갑니다.
@@ -110,12 +110,12 @@ export function BusinessSection() {
                 <h3 className="text-2xl font-bold text-white mb-3 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                   {item.title}
                 </h3>
-                <p className="text-slate-200 mb-6 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 delay-100 leading-relaxed">
+                <p className="text-white/80 mb-6 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 delay-100 leading-relaxed">
                   {item.description}
                 </p>
                 <Link href={item.link}>
                   <Button 
-                    className="border-2 border-white/80 bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-black transition-all duration-300 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 delay-200 rounded-full px-6"
+                    className="border-2 border-white/80 bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-ink-900 transition-all duration-300 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 delay-200 rounded-full px-6"
                   >
                     자세히 보기 <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>

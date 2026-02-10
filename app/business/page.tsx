@@ -48,17 +48,17 @@ export default function BusinessPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-slate-900 py-28 sm:py-36 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/20 via-transparent to-slate-900/80" />
+      <section className="relative bg-ink-900 py-28 sm:py-36 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-900/20 via-transparent to-ink-900/80" />
         <div className="container relative z-10 px-4 md:px-6">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="text-emerald-400 font-bold tracking-wider uppercase text-sm">
+            <span className="text-brand-400 font-bold tracking-wider uppercase text-sm">
               사업영역
             </span>
             <h1 className="mt-3 text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight">
               사람과 기술이<br />함께 만드는 미래
             </h1>
-            <p className="mt-6 text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto">
+            <p className="mt-6 text-lg text-ink-300 leading-relaxed max-w-2xl mx-auto">
               함께봄은 AI 기술과 창의적인 아이디어를 결합하여
               새로운 가치를 창출하고 더 나은 세상을 만들어갑니다.
             </p>
@@ -86,37 +86,37 @@ export default function BusinessPage() {
                       fill
                       className="object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink-900/30 to-transparent" />
                   </div>
                 </div>
 
                 {/* Content */}
                 <div className="flex-1 w-full">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-600">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-light text-brand-600">
                       <service.icon className="h-6 w-6" />
                     </div>
-                    <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
+                    <h2 className="text-2xl md:text-3xl font-bold text-ink-900">
                       {service.title}
                     </h2>
                   </div>
-                  <p className="text-slate-600 leading-relaxed mb-6">
+                  <p className="text-ink-500 leading-relaxed mb-6">
                     {service.description}
                   </p>
                   <ul className="space-y-3 mb-8">
                     {service.features.map((feature) => (
                       <li
                         key={feature}
-                        className="flex items-center gap-3 text-slate-700"
+                        className="flex items-center gap-3 text-ink-700"
                       >
-                        <span className="h-2 w-2 rounded-full bg-emerald-500 shrink-0" />
+                        <span className="h-2 w-2 rounded-full bg-brand-500 shrink-0" />
                         {feature}
                       </li>
                     ))}
                   </ul>
                   <Button
                     asChild
-                    className="rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-6"
+                    className="rounded-full bg-brand-500 hover:bg-brand-600 text-white font-semibold px-6"
                   >
                     <Link href={service.href}>
                       자세히 보기 <ArrowRight className="ml-2 h-4 w-4" />

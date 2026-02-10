@@ -4,29 +4,30 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 160 10% 10%;
+    /* 봄의 정원 — Brand Color System */
+    --background: 60 20% 97%;       /* 한지 #FAFAF7 */
+    --foreground: 224 16% 20%;      /* 숯빛 #2A2F3A */
     --card: 0 0% 100%;
-    --card-foreground: 160 10% 10%;
+    --card-foreground: 224 16% 20%;
     --popover: 0 0% 100%;
-    --popover-foreground: 160 10% 10%;
-    --primary: 152 60% 38%;
+    --popover-foreground: 224 16% 20%;
+    --primary: 155 52% 37%;         /* 새잎 초록 #2D8F6F */
     --primary-foreground: 0 0% 100%;
-    --secondary: 80 25% 95%;
-    --secondary-foreground: 160 10% 10%;
+    --secondary: 150 20% 95%;
+    --secondary-foreground: 224 16% 20%;
     --muted: 60 10% 96%;
-    --muted-foreground: 160 5% 40%;
-    --accent: 152 20% 95%;
-    --accent-foreground: 152 60% 25%;
-    --destructive: 0 72% 51%;
+    --muted-foreground: 218 10% 53%; /* 은회색 #7A8496 */
+    --accent: 150 40% 93%;          /* 연잎 #E8F5EE */
+    --accent-foreground: 155 52% 30%;
+    --destructive: 6 60% 49%;       /* 인장 주홍 #C94432 */
     --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 92%;
-    --input: 0 0% 92%;
-    --ring: 152 60% 38%;
-    --chart-1: 152 60% 38%;
-    --chart-2: 45 80% 58%;
+    --border: 60 10% 90%;
+    --input: 60 10% 90%;
+    --ring: 155 52% 37%;
+    --chart-1: 155 52% 37%;
+    --chart-2: 6 60% 49%;
     --chart-3: 200 50% 50%;
-    --chart-4: 90 40% 50%;
+    --chart-4: 150 40% 55%;
     --chart-5: 30 70% 55%;
     --radius: 0.75rem;
   }

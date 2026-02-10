@@ -6,9 +6,9 @@ import Image from "next/image";
 import { ArrowRight, Calendar } from "lucide-react";
 
 const categoryColors: Record<string, { bg: string; text: string }> = {
-  "인사이트": { bg: "bg-blue-50", text: "text-blue-700" },
-  "기업소식": { bg: "bg-emerald-50", text: "text-emerald-700" },
-  "프로젝트": { bg: "bg-violet-50", text: "text-violet-700" },
+  "인사이트": { bg: "bg-brand-light", text: "text-brand-700" },
+  "기업소식": { bg: "bg-seal-light", text: "text-seal-700" },
+  "프로젝트": { bg: "bg-ink-100", text: "text-ink-700" },
 };
 
 const newsItems = [
@@ -48,7 +48,7 @@ const newsItems = [
 
 export function NewsSection() {
   return (
-    <section className="py-24 bg-slate-50">
+    <section className="py-24 bg-hanji">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
            <div>
@@ -56,7 +56,7 @@ export function NewsSection() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-emerald-500 font-bold tracking-wider uppercase mb-2 block"
+                className="text-brand-500 font-bold tracking-wider uppercase mb-2 block"
               >
                 소식
               </motion.span>
@@ -65,7 +65,7 @@ export function NewsSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="text-3xl md:text-4xl font-bold text-slate-900"
+                className="text-3xl md:text-4xl font-bold text-ink-900"
               >
                 함께봄의 새로운 소식
               </motion.h2>
@@ -76,7 +76,7 @@ export function NewsSection() {
              viewport={{ once: true }}
              transition={{ delay: 0.2 }}
            >
-              <Link href="/news" className="text-slate-500 hover:text-emerald-500 font-medium inline-flex items-center mt-4 md:mt-0 transition-colors group">
+              <Link href="/news" className="text-ink-400 hover:text-brand-500 font-medium inline-flex items-center mt-4 md:mt-0 transition-colors group">
                 전체보기 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Link>
            </motion.div>
@@ -101,16 +101,16 @@ export function NewsSection() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="absolute top-4 left-4">
-                    <span className={`${categoryColors[item.category]?.bg || "bg-slate-100"} ${categoryColors[item.category]?.text || "text-slate-800"} backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold shadow-sm`}>
+                    <span className={`${categoryColors[item.category]?.bg || "bg-ink-100"} ${categoryColors[item.category]?.text || "text-ink-800"} backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold shadow-sm`}>
                       {item.category}
                     </span>
                   </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="font-bold text-lg text-slate-900 mb-3 line-clamp-2 leading-snug group-hover:text-emerald-600 transition-colors duration-300">
+                  <h3 className="font-bold text-lg text-ink-900 mb-3 line-clamp-2 leading-snug group-hover:text-brand-600 transition-colors duration-300">
                     {item.title}
                   </h3>
-                  <div className="flex items-center text-sm text-slate-400 mt-auto">
+                  <div className="flex items-center text-sm text-ink-400 mt-auto">
                     <Calendar className="h-4 w-4 mr-2" />
                     <span>{item.date}</span>
                   </div>

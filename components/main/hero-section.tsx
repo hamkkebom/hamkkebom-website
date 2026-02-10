@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -9,11 +10,11 @@ export function HeroSection() {
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-slate-900">
+    <section className="relative h-screen w-full overflow-hidden bg-ink-900">
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
         {/* Static gradient background — shown immediately while video loads */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950" />
+        <div className="absolute inset-0 bg-gradient-to-br from-ink-950 via-ink-900 to-brand-900" />
         <video
           autoPlay
           loop
@@ -33,38 +34,46 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
       </div>
 
-      {/* Content Overlay */}
+      {/* Main Content */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-white">
-        <h1 className="animate-in fade-in slide-in-from-bottom-8 duration-700 text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-          AI로 만드는<br />
-          <span className="text-emerald-400">더 나은 내일</span>
-        </h1>
-        
-        <p className="animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200 mt-6 max-w-2xl text-lg text-gray-200 sm:text-xl font-light leading-relaxed">
-          기술과 사람이 조화로운 세상을 위해,<br className="hidden sm:block" />
-          함께봄이 바른 AI 기술로 새로운 가치를 창조합니다.
-        </p>
-
-        <div className="animate-in fade-in slide-in-from-bottom-8 duration-700 delay-400 mt-10 flex flex-col items-center gap-4 sm:flex-row">
-          <Button
-            asChild
-            size="lg"
-            className="group min-w-[160px] rounded-full bg-white text-black hover:bg-emerald-400 hover:text-black border-none text-base font-semibold transition-all duration-300"
-          >
-            <Link href="/about">
-              브랜드 스토리
-            </Link>
+        <motion.span
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-4 text-sm font-bold uppercase tracking-widest text-brand-300"
+        >
+          AI 영상 · 교육 · 마케팅
+        </motion.span>
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight"
+        >
+          나란히 걷다,<br />마침내 봄
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="mt-6 max-w-xl text-base md:text-lg text-white/80 leading-relaxed"
+        >
+          함께봄은 AI 기술을 활용하여 영상 제작, 교육, 마케팅 분야의<br className="hidden md:block" />
+          혁신적인 솔루션을 제공합니다.
+        </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="mt-8 flex flex-wrap gap-4 justify-center"
+        >
+          <Button asChild size="lg" className="rounded-full bg-brand-500 hover:bg-brand-600 text-white px-8 font-bold shadow-lg shadow-brand-500/20">
+            <Link href="/contact">무료 상담 신청</Link>
           </Button>
-          <Button
-            asChild
-            size="lg"
-            className="group min-w-[160px] rounded-full border-2 border-white/60 bg-transparent text-white hover:bg-white/10 hover:text-white hover:border-emerald-400 text-base font-semibold transition-all duration-300"
-          >
-            <Link href="/portfolio">
-              포트폴리오
-            </Link>
+          <Button asChild variant="outline" size="lg" className="rounded-full border-2 border-white/80 text-white hover:bg-white hover:text-ink-900 px-8 font-bold">
+            <Link href="/portfolio">포트폴리오</Link>
           </Button>
-        </div>
+        </motion.div>
       </div>
 
       {/* Scroll Indicator */}

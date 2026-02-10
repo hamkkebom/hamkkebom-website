@@ -77,17 +77,17 @@ export default function NewsPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-slate-900 py-28 sm:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/20 via-transparent to-slate-900/80" />
+      <section className="relative bg-ink-900 py-28 sm:py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-900/20 via-transparent to-ink-900/80" />
         <div className="container relative z-10 px-4 md:px-6">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="text-emerald-400 font-bold tracking-wider uppercase text-sm">
+            <span className="text-brand-400 font-bold tracking-wider uppercase text-sm">
               소식
             </span>
             <h1 className="mt-3 text-4xl sm:text-5xl font-bold text-white leading-tight">
               함께봄의 새로운 소식
             </h1>
-            <p className="mt-4 text-lg text-slate-300 leading-relaxed">
+            <p className="mt-4 text-lg text-ink-300 leading-relaxed">
               최신 뉴스, 인사이트, 프로젝트 업데이트를 전합니다.
             </p>
           </div>
@@ -95,7 +95,7 @@ export default function NewsPage() {
       </section>
 
       {/* Category Filter */}
-      <section className="bg-white border-b border-slate-100 sticky top-16 z-30">
+      <section className="bg-white border-b border-ink-100 sticky top-16 z-30">
         <div className="container px-4 md:px-6">
           <div className="flex gap-6 py-4 overflow-x-auto">
             {categories.map((cat) => (
@@ -103,8 +103,8 @@ export default function NewsPage() {
                 key={cat}
                 className={`text-sm font-medium whitespace-nowrap pb-1 transition-colors ${
                   cat === "전체"
-                    ? "text-emerald-600 border-b-2 border-emerald-500"
-                    : "text-slate-500 hover:text-slate-900"
+                    ? "text-brand-600 border-b-2 border-brand-500"
+                    : "text-ink-400 hover:text-ink-900"
                 }`}
               >
                 {cat}
@@ -127,23 +127,23 @@ export default function NewsPage() {
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute top-4 left-4">
-                  <span className="bg-emerald-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                  <span className="bg-brand-500 text-white px-3 py-1 rounded-full text-xs font-bold">
                     {newsItems[0].category}
                   </span>
                 </div>
               </div>
               <div className="flex-1 w-full">
-                <div className="flex items-center text-sm text-slate-400 mb-3">
+                <div className="flex items-center text-sm text-ink-400 mb-3">
                   <Calendar className="h-4 w-4 mr-2" />
                   {newsItems[0].date}
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-slate-900 group-hover:text-emerald-600 transition-colors leading-tight">
+                <h2 className="text-2xl md:text-3xl font-bold text-ink-900 group-hover:text-brand-600 transition-colors leading-tight">
                   {newsItems[0].title}
                 </h2>
-                <p className="mt-4 text-slate-600 leading-relaxed">
+                <p className="mt-4 text-ink-500 leading-relaxed">
                   {newsItems[0].summary}
                 </p>
-                <span className="mt-6 inline-flex items-center text-emerald-600 font-medium">
+                <span className="mt-6 inline-flex items-center text-brand-600 font-medium">
                   자세히 보기 <ArrowRight className="ml-2 h-4 w-4" />
                 </span>
               </div>
@@ -153,7 +153,7 @@ export default function NewsPage() {
       </section>
 
       {/* News Grid */}
-      <section className="py-16 bg-slate-50">
+      <section className="py-16 bg-hanji">
         <div className="container px-4 md:px-6">
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {newsItems.slice(1).map((item) => (
@@ -169,20 +169,20 @@ export default function NewsPage() {
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute top-4 left-4">
-                    <span className="bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-slate-800">
+                    <span className="bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-ink-800">
                       {item.category}
                     </span>
                   </div>
                 </div>
                 <div className="p-6">
-                  <div className="flex items-center text-sm text-slate-400 mb-3">
+                  <div className="flex items-center text-sm text-ink-400 mb-3">
                     <Calendar className="h-4 w-4 mr-2" />
                     {item.date}
                   </div>
-                  <h3 className="font-bold text-lg text-slate-900 group-hover:text-emerald-600 transition-colors leading-snug line-clamp-2">
+                  <h3 className="font-bold text-lg text-ink-900 group-hover:text-brand-600 transition-colors leading-snug line-clamp-2">
                     {item.title}
                   </h3>
-                  <p className="mt-2 text-sm text-slate-600 leading-relaxed line-clamp-2">
+                  <p className="mt-2 text-sm text-ink-500 leading-relaxed line-clamp-2">
                     {item.summary}
                   </p>
                 </div>

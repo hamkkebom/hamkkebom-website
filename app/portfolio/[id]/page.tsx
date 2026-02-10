@@ -92,7 +92,7 @@ export default function PortfolioDetailPage({ params }: PageProps) {
   return (
     <>
       {/* Hero with image */}
-      <section className="relative bg-slate-900 py-28 sm:py-36 overflow-hidden">
+      <section className="relative bg-ink-900 py-28 sm:py-36 overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src={item.image}
@@ -101,28 +101,28 @@ export default function PortfolioDetailPage({ params }: PageProps) {
             className="object-cover opacity-30"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-slate-900/40 to-slate-900" />
+          <div className="absolute inset-0 bg-gradient-to-b from-ink-900/60 via-ink-900/40 to-ink-900" />
         </div>
         <div className="container relative z-10 px-4 md:px-6">
           <div className="mx-auto max-w-3xl">
             <Link
               href="/portfolio"
-              className="inline-flex items-center text-sm text-slate-400 transition-colors hover:text-emerald-400 mb-6"
+              className="inline-flex items-center text-sm text-ink-400 transition-colors hover:text-brand-400 mb-6"
             >
               <ArrowLeft className="mr-1 h-4 w-4" />
               포트폴리오 목록
             </Link>
             <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${
               item.category === "video"
-                ? "bg-blue-500/20 text-blue-300"
-                : "bg-orange-500/20 text-orange-300"
+                ? "bg-brand-500/20 text-brand-300"
+                : "bg-seal-500/20 text-seal-300"
             }`}>
               {categoryLabel}
             </span>
             <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
               {item.title}
             </h1>
-            <p className="mt-2 text-slate-400 text-lg">{item.client}</p>
+            <p className="mt-2 text-ink-400 text-lg">{item.client}</p>
           </div>
         </div>
       </section>
@@ -141,27 +141,27 @@ export default function PortfolioDetailPage({ params }: PageProps) {
               />
             </div>
 
-            <p className="text-lg text-slate-700 leading-relaxed mb-12">
+            <p className="text-lg text-ink-700 leading-relaxed mb-12">
               {item.description}
             </p>
 
             {/* Challenge / Solution / Result */}
             <div className="grid gap-6 sm:grid-cols-3">
-              <div className="p-6 rounded-2xl bg-red-50 border border-red-100">
-                <h3 className="font-bold text-red-700 flex items-center gap-2 mb-3">
-                  <span className="h-2 w-2 rounded-full bg-red-500" />
+              <div className="p-6 rounded-2xl bg-seal-light border border-seal-200">
+                <h3 className="font-bold text-seal-700 flex items-center gap-2 mb-3">
+                  <span className="h-2 w-2 rounded-full bg-seal-500" />
                   과제
                 </h3>
-                <p className="text-sm text-slate-700 leading-relaxed">
+                <p className="text-sm text-ink-700 leading-relaxed">
                   {item.challenge}
                 </p>
               </div>
-              <div className="p-6 rounded-2xl bg-emerald-50 border border-emerald-100">
-                <h3 className="font-bold text-emerald-700 flex items-center gap-2 mb-3">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+              <div className="p-6 rounded-2xl bg-brand-light border border-brand-200">
+                <h3 className="font-bold text-brand-700 flex items-center gap-2 mb-3">
+                  <CheckCircle2 className="h-4 w-4 text-brand-600" />
                   솔루션
                 </h3>
-                <p className="text-sm text-slate-700 leading-relaxed">
+                <p className="text-sm text-ink-700 leading-relaxed">
                   {item.solution}
                 </p>
               </div>
@@ -180,7 +180,7 @@ export default function PortfolioDetailPage({ params }: PageProps) {
               <Button
                 asChild
                 size="lg"
-                className="rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-8"
+                className="rounded-full bg-brand-500 hover:bg-brand-600 text-white font-semibold px-8"
               >
                 <Link href="/contact">
                   비슷한 프로젝트 문의하기 <ArrowRight className="ml-2 h-4 w-4" />

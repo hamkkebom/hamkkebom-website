@@ -16,7 +16,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-slate-900 text-slate-300 py-12 border-t border-slate-800 relative">
+    <footer className="bg-ink-900 text-ink-300 py-12 border-t border-ink-800 relative">
       <div className="container px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           <div className="col-span-1 md:col-span-1">
@@ -29,7 +29,7 @@ export function Footer() {
                 className="h-12 w-auto object-contain brightness-0 invert"
               />
             </Link>
-            <p className="text-sm text-slate-300 leading-relaxed mb-6">
+            <p className="text-sm text-ink-300 leading-relaxed mb-6">
               AI 기술과 크리에이티브의 만남,<br />
               세상을 바꾸는 새로운 시선.
             </p>
@@ -39,7 +39,7 @@ export function Footer() {
                    key={label}
                    href={href}
                    aria-label={label}
-                   className={`text-slate-400 ${hoverColor} hover:scale-110 transition-all duration-300`}
+                   className={`text-ink-400 ${hoverColor} hover:scale-110 transition-all duration-300`}
                  >
                    <Icon className="h-5 w-5" />
                  </Link>
@@ -50,29 +50,29 @@ export function Footer() {
           <div>
             <h4 className="font-bold text-white mb-4">회사</h4>
             <ul className="space-y-2.5 text-sm">
-              <li><Link href="/about" className="hover:text-emerald-400 transition-colors">회사소개</Link></li>
-              <li><Link href="/history" className="hover:text-emerald-400 transition-colors">연혁</Link></li>
-              <li><Link href="/careers" className="hover:text-emerald-400 transition-colors">채용</Link></li>
-              <li><Link href="/contact" className="hover:text-emerald-400 transition-colors">문의하기</Link></li>
+              <li><Link href="/about" className="hover:text-brand-400 transition-colors">회사소개</Link></li>
+              <li><Link href="/history" className="hover:text-brand-400 transition-colors">연혁</Link></li>
+              <li><Link href="/careers" className="hover:text-brand-400 transition-colors">채용</Link></li>
+              <li><Link href="/contact" className="hover:text-brand-400 transition-colors">문의하기</Link></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-bold text-white mb-4">사업영역</h4>
             <ul className="space-y-2.5 text-sm">
-              <li><Link href="/services/video" className="hover:text-emerald-400 transition-colors">AI 영상 제작</Link></li>
-              <li><Link href="/services/marketing" className="hover:text-emerald-400 transition-colors">디지털 마케팅</Link></li>
-              <li><Link href="/services/education" className="hover:text-emerald-400 transition-colors">미래 교육</Link></li>
+              <li><Link href="/services/video" className="hover:text-brand-400 transition-colors">AI 영상 제작</Link></li>
+              <li><Link href="/services/marketing" className="hover:text-brand-400 transition-colors">디지털 마케팅</Link></li>
+              <li><Link href="/services/education" className="hover:text-brand-400 transition-colors">미래 교육</Link></li>
             </ul>
           </div>
 
           <div>
              <h4 className="font-bold text-white mb-4">연락처</h4>
-             <ul className="space-y-2.5 text-sm text-slate-300">
+             <ul className="space-y-2.5 text-sm text-ink-300">
                 <li>서울특별시 강남구</li>
                 <li>Tel: 02-1234-5678</li>
                 <li>
-                  <Link href="mailto:contact@hamkkebom.com" className="hover:text-emerald-400 transition-colors">
+                  <Link href="mailto:contact@hamkkebom.com" className="hover:text-brand-400 transition-colors">
                     contact@hamkkebom.com
                   </Link>
                 </li>
@@ -80,7 +80,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-400">
+        <div className="border-t border-ink-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-ink-400">
            <div className="flex gap-4 mb-4 md:mb-0">
               <Link href="/privacy" className="hover:text-white transition-colors">개인정보처리방침</Link>
               <Link href="/terms" className="hover:text-white transition-colors">이용약관</Link>
@@ -93,7 +93,7 @@ export function Footer() {
       {/* Back to Top Button */}
       <button
         onClick={scrollToTop}
-        className="absolute right-6 bottom-8 flex h-10 w-10 items-center justify-center rounded-full bg-slate-800 text-slate-400 hover:bg-emerald-500 hover:text-white transition-all duration-300 shadow-lg hover:shadow-emerald-500/20 hover:-translate-y-1"
+        className="absolute right-6 bottom-8 flex h-10 w-10 items-center justify-center rounded-full bg-ink-800 text-ink-400 hover:bg-brand-500 hover:text-white transition-all duration-300 shadow-lg hover:shadow-brand-500/20 hover:-translate-y-1"
         aria-label="맨 위로"
       >
         <ArrowUp className="h-5 w-5" />
